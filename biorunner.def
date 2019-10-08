@@ -107,21 +107,22 @@ EOT
       python3 setup.py install
    )
    rm -Rf Unicycler
-#   #
-#   # Mauve
-#   (
-#      wget http://darlinglab.org/mauve/snapshots/2015/2015-02-13/linux-x64/mauve_linux_snapshot_2015-02-13.tar.gz
-#      tar xfvz mauve_linux_snapshot_2015-02-13.tar.gz -C /usr/local/lib
-#      ln -s ../lib/mauve_snapshot_2015-02-13/Mauve /usr/local/bin/Mauve
-#   )
-#   #
-#   # PhyML
-#   (
-#      wget http://www.atgc-montpellier.fr/download/sources/sms/sms-1.8.1.zip
-#      unzip sms-1.8.1.zip
-#      cd sms-1.8.1
-#      make
-#      cp phyml-src/phyml /usr/local/bin
-#   )
-#
-#
+   #
+   # Mauve
+   (
+      wget http://darlinglab.org/mauve/snapshots/2015/2015-02-13/linux-x64/mauve_linux_snapshot_2015-02-13.tar.gz
+      tar xfvz mauve_linux_snapshot_2015-02-13.tar.gz -C /usr/local/lib
+      ln -s ../lib/mauve_snapshot_2015-02-13/Mauve /usr/local/bin/Mauve
+   )
+   rm -f mauve_linux_snapshot_2015-02-13.tar.gz
+   #
+   # PhyML
+   (
+      wget http://www.atgc-montpellier.fr/download/sources/sms/sms-1.8.1.zip
+      unzip sms-1.8.1.zip
+      cd sms-1.8.1
+      make
+      cp phyml-src/phyml /usr/local/bin
+   )
+
+
