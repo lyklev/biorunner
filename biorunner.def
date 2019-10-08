@@ -55,14 +55,15 @@ Stage: build
      cp trimal readal /usr/local/bin
    )
    rm -Rf trimal.v1.2rev59.tar.gz trimAl
-#   #
-#   #Filtlong
-#   (
-#      git clone https://github.com/rrwick/Filtlong.git
-#      cd Filtlong
-#      make
-#      cp bin/filtlong /usr/local/bin
-#   )
+   #
+   #Filtlong
+   (
+      git clone https://github.com/rrwick/Filtlong.git
+      cd Filtlong
+      make
+      cp bin/filtlong /usr/local/bin
+   )
+   rm -Rf Filtlong
 #   #
 #   # Racon
 #   (
