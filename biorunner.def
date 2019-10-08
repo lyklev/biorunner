@@ -85,27 +85,28 @@ Stage: build
       cp minimap2 /usr/local/bin
    )
    rm -Rf minimap2-2.15.tar.bz2 minimap2-2.15
-#   #
-#   # Pilon
-#   (
-#      wget https://github.com/broadinstitute/pilon/releases/download/v1.23/pilon-1.23.jar
-#     
-#      cp pilon-1.23.jar /usr/local/bin
-#      cat <<EOT > /usr/local/bin/pilon
-##!/bin/bash
-#
-#exec java -jar /usr/local/bin/pilon-1.23.jar \$@
-#EOT
-#     
-#      chmod a+x /usr/local/bin/pilon
-#   )
-#   #
-#   # Unicycler (needs pilon)
-#   (
-#      git clone https://github.com/rrwick/Unicycler.git
-#      cd Unicycler
-#      python3 setup.py install
-#   )
+   #
+   # Pilon
+   (
+      cd /usr/local/bin
+      wget https://github.com/broadinstitute/pilon/releases/download/v1.23/pilon-1.23.jar
+     
+      cat <<EOT > ./pilon
+#!/bin/bash
+
+exec java -jar /usr/local/bin/pilon-1.23.jar \$@
+EOT
+     
+      chmod a+x ./pilon
+   )
+   #
+   # Unicycler (needs pilon)
+   (
+      git clone https://github.com/rrwick/Unicycler.git
+      cd Unicycler
+      python3 setup.py install
+   )
+   rm -Rf Unicycler
 #   #
 #   # Mauve
 #   (
