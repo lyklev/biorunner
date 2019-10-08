@@ -44,16 +44,17 @@ Stage: build
      make HDF5=noinstall EIGEN=noinstall HTS=noinstall
      cp nanopolish /usr/local/bin
    )
-#   rm -Rf nanopolish
+   rm -Rf nanopolish
    #
    # trimAl
-#   (
-#     wget http://trimal.cgenomics.org/_media/trimal.v1.2rev59.tar.gz
-#     tar xfvz trimal.v1.2rev59.tar.gz
-#     cd trimAl/source
-#     make -j 2
-#     cp trimal readal /usr/local/bin
-#   )
+   (
+     wget http://trimal.cgenomics.org/_media/trimal.v1.2rev59.tar.gz
+     tar xfvz trimal.v1.2rev59.tar.gz
+     cd trimAl/source
+     make -j 2
+     cp trimal readal /usr/local/bin
+   )
+   rm -Rf trimal.v1.2rev59.tar.gz trimAl
 #   #
 #   #Filtlong
 #   (
