@@ -124,5 +124,27 @@ EOT
       make
       cp phyml-src/phyml /usr/local/bin
    )
+   # Centrifuge
+   (
+      git clone https://github.com/infphilo/centrifuge
+      cd centrifuge
+      make
+      sudo make install prefix=/usr/local
+   )
+   rm -Rf centrifuge
+   #
+   #
+   # Hmmer (multi-threaded SSE version; no MPI)
+   (
+      wget http://eddylab.org/software/hmmer/hmmer-3.2.tar.gz
+      tar xfvz hmmer-3.2.tar.gz
+      cd hmmer-3.2
+      ./configure --enable-threads --enable-sse
+      make
+      make install
+   )
+   rm -Rf hmmer-3.2.tar.gz hmmer
 
+
+      
 
