@@ -64,27 +64,27 @@ Stage: build
       cp bin/filtlong /usr/local/bin
    )
    rm -Rf Filtlong
-#   #
-#   # Racon
-#   (
-#      git clone --recursive https://github.com/isovic/racon.git racon
-#      cd racon
-#      mkdir build
-#      cd build
-#      cmake -DCMAKE_BUILD_TYPE=Release ..
-#      make
-#      make install
-#   )
-#   # minimap2
-#   (
-#      wget https://github.com/lh3/minimap2/releases/download/v2.15/minimap2-2.15.tar.bz2
-#      tar xfvj minimap2-2.15.tar.bz2
-#      cd minimap2-2.15
-#      make
-#      cp minimap2 /usr/local/bin
-#      cd ..
-#      rm -Rf minimap2-2.15
-#   )
+   #
+   # Racon
+   (
+      git clone --recursive https://github.com/isovic/racon.git racon
+      cd racon
+      mkdir build
+      cd build
+      cmake -DCMAKE_BUILD_TYPE=Release ..
+      make
+      make install
+   )
+   rm -Rf racon
+   # minimap2
+   (
+      wget https://github.com/lh3/minimap2/releases/download/v2.15/minimap2-2.15.tar.bz2
+      tar xfvj minimap2-2.15.tar.bz2
+      cd minimap2-2.15
+      make
+      cp minimap2 /usr/local/bin
+   )
+   rm -Rf minimap2-2.15.tar.bz2 minimap2-2.15
 #   #
 #   # Pilon
 #   (
