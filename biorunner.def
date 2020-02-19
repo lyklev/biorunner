@@ -7,6 +7,7 @@ Stage: build
    export LC_ALL=C.UTF-8
    PROKKA_ROOT=/usr/local/share/prokka
    export PATH=$PROKKA_ROOT/bin:$PROKKA_ROOT/binaries/linux:$PATH
+   export PATH=/usr/local/share/bbmap
 
 
 %post
@@ -167,8 +168,16 @@ EOT
       prokka --setupdb
    )
    #
+   # BBmap
    #
-
-
-      
+   (
+      curl "https://downloads.sourceforge.net/project/bbmap/BBMap_38.79.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fbbmap%2Ffiles%2FBBMap_38.79.tar.gz%2Fdownload&ts=1582234177" | tar xz -C /usr/local/share
+   )
+   #
+   # nanopack
+   #
+   (
+      apt-get install -y cython3
+      pip3 install nanopack
+   )
 

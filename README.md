@@ -55,4 +55,36 @@ instructions.
 
 ## Applications offered through Biorunner
 
+Thefollowing applications are exposed through Biorunner:
 
+### From Ubuntu
+
+* bowtie2
+* samtools
+* ncbi-blast2
+* minimap
+* miniasm
+* fastqc
+* poretools
+* clustal Omega
+* clustal x
+* SPAdes
+
+### Through custom builds
+
+* Deepbinner
+* Nanopolish
+* trimAl
+* Filtlong
+* Racon
+* minimap2
+* Pilon
+* Unicycler
+* Mauve
+* PhyML
+* Centrifuge
+* Hmmer
+* Prokka (v1.14.6)
+* nanopack
+
+ 

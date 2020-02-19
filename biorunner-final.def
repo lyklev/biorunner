@@ -1,0 +1,8 @@
+BootStrap: localimage
+From: biorunner
+
+%environment
+   export LC_ALL=C.UTF-8
+   PROKKA_ROOT=/usr/local/share/prokka
+   export PATH=$PROKKA_ROOT/bin:$PROKKA_ROOT/binaries/linux:$PATH
+   export PATH=/usr/local/share/bbmap:$PATH
