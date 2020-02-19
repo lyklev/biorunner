@@ -5,6 +5,9 @@ Stage: build
 # this will prevent Unicode decode errors
 %environment
    export LC_ALL=C.UTF-8
+   PROKKA_ROOT=/usr/local/share/prokka
+   export PATH=$PROKKA_ROOT/bin:$PROKKA_ROOT/binaries/linux:$PATH
+
 
 %post
    export LC_ALL=C.UTF-8
@@ -144,6 +147,27 @@ EOT
       make install
    )
    rm -Rf hmmer-3.2.tar.gz hmmer
+   #
+   #
+   # Prokka
+   (
+      apt-get install -y libdatetime-perl libxml-simple-perl \
+         libdigest-md5-perl git default-jre bioperl
+      # the instructions tell me to install Bio::Perl, but it is
+      # already installed, and building again gives an error
+      # so commented out for now.
+      #apt-get install -y cpanminus
+      #cpanm Bio::Perl
+      cd /usr/local/share
+      git clone https://github.com/tseemann/prokka.git
+      cd prokka
+      git checkout -b v1.14.6
+      PROKKA_ROOT=/usr/local/share/prokka
+      export PATH=$PROKKA_ROOT/bin:$PROKKA_ROOT/binaries/linux:$PATH
+      prokka --setupdb
+   )
+   #
+   #
 
 
       
