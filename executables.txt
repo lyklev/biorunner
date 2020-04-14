@@ -345,6 +345,10 @@ mappy
 pauvre
 pysam
 #
+# PhyML + SMS
+phyml
+sms.sh
+#
 # other
 #
 alimask
