@@ -81,10 +81,19 @@ Thefollowing applications are exposed through Biorunner:
 * Pilon
 * Unicycler
 * Mauve
-* PhyML
+* PhyML, SMS-PhyML
 * Centrifuge
 * Hmmer
 * Prokka (v1.14.6)
 * nanopack
 
+
+## Software version list
+
+|-----------------------------|--------------|
+| Package                     | Version      |
+|-----------------------------|--------------|
+| SMS-PhyML                   | 1.8.4        |
+| Prokka                      | 1.14.6       | 
  
+
