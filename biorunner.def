@@ -190,10 +190,10 @@ EOT
    #
    # nanopack
    #
-   #(
-   #   apt-get install -y cython3
-   #   pip3 install nanopack
-   #)
+   (
+      apt-get install -y cython3
+      pip3 install nanopack
+   )
    #
    # Create the executable wrapper inside the container
    echo '#!/bin/bash' >  /usr/local/bin/exec-wrapper
