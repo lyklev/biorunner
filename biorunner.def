@@ -1,4 +1,4 @@
-Bootstrap: library
+Bootstrap: docker
 From: ubuntu:18.04
 Stage: build
 
@@ -7,7 +7,7 @@ Stage: build
    export LC_ALL=C.UTF-8
    PROKKA_ROOT=/usr/local/share/prokka
    export PATH=$PROKKA_ROOT/bin:$PROKKA_ROOT/binaries/linux:$PATH
-   export PATH=/usr/local/share/bbmap
+   export PATH=$PATH:/usr/local/share/bbmap
 
 
 %post
@@ -18,13 +18,15 @@ Stage: build
    apt-add-repository universe
    apt-add-repository multiverse
    apt-get update
-   apt-get install -y build-essential
+   apt-get install -y build-essential automake
    apt-get install -y cmake
+   apt-get install -y curl
    apt-get install -y python3 python3-pip
    apt-get install -y git wget unzip
 
    apt-get install -y libhdf5-dev
    apt-get install -y python3-h5py
+   apt-get install -y libbz2-dev
    #
    apt-get install -y libeigen3-dev
    apt-get install -y libhts-dev
@@ -120,20 +122,32 @@ EOT
    )
    rm -f mauve_linux_snapshot_2015-02-13.tar.gz
    #
-   # PhyML
+   # PhyML & sms
    (
-      wget http://www.atgc-montpellier.fr/download/sources/sms/sms-1.8.1.zip
-      unzip sms-1.8.1.zip
-      cd sms-1.8.1
-      make
-      cp phyml-src/phyml /usr/local/bin
+      wget http://www.atgc-montpellier.fr/download/sources/sms/sms-1.8.4.zip
+      unzip sms-1.8.4.zip
+      cd sms-1.8.4
+      (
+         # phyml
+         cd phyml-src/phyml-3.3.20190909
+         sh autogen.sh
+         ./configure --disable-mpi
+         make
+         make install # installs phyml in /usr/local/bin
+      )
+      cp criterion.sh distance.sh sms.sh strategy.sh chi.R /usr/local/bin
+      mkdir -p /usr/local/share/sms
+      cp -r matrix /usr/local/share/sms
+      cp sms.cfg /usr/local/bin
+      echo "PHYMLBIN=/usr/local/bin/phyml" >> /usr/local/bin/sms.cfg
+      echo MATRIXDIRPATH=/usr/local/share/sms/matrix >> /usr/local/bin/sms.cfg
    )
    # Centrifuge
    (
       git clone https://github.com/infphilo/centrifuge
       cd centrifuge
       make
-      sudo make install prefix=/usr/local
+      make install prefix=/usr/local
    )
    rm -Rf centrifuge
    #
@@ -171,13 +185,21 @@ EOT
    # BBmap
    #
    (
-      curl "https://downloads.sourceforge.net/project/bbmap/BBMap_38.79.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fbbmap%2Ffiles%2FBBMap_38.79.tar.gz%2Fdownload&ts=1582234177" | tar xz -C /usr/local/share
+      curl -L "https://downloads.sourceforge.net/project/bbmap/BBMap_38.79.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fbbmap%2Ffiles%2FBBMap_38.79.tar.gz%2Fdownload&ts=1582234177" | tar xz -C /usr/local/share
    )
    #
    # nanopack
    #
-   (
-      apt-get install -y cython3
-      pip3 install nanopack
-   )
+   #(
+   #   apt-get install -y cython3
+   #   pip3 install nanopack
+   #)
+   #
+   # Create the executable wrapper inside the container
+   echo '#!/bin/bash' >  /usr/local/bin/exec-wrapper
+   echo 'exec $@'     >> /usr/local/bin/exec-wrapper
+   chmod a+rx            /usr/local/bin/exec-wrapper
+
+%runscript
+  /usr/local/bin/exec-wrapper "$@"
 
